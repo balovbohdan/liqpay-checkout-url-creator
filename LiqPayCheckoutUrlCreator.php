@@ -1,6 +1,4 @@
 <?
-namespace banks\liqpay;
-
 class LiqPayCheckoutUrlCreator {
     /**
      * @param array $apiParams
