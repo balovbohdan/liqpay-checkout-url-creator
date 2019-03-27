@@ -1,5 +1,5 @@
 <?
-namespace platformLib\banks\liqpay;
+namespace banks\liqpay;
 
 class LiqPayCheckoutUrlCreator {
     /**
