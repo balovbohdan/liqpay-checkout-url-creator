@@ -6,6 +6,8 @@ class LiqPayCheckoutUrlCreator {
      *         public_key => string,
  *             private_key => string
      *     ]
+     * 
+     * @throws \Exception
      */
     static function create(array $apiParams, array $paymentParams) {
         $self = new self($apiParams, $paymentParams);
@@ -29,6 +31,9 @@ class LiqPayCheckoutUrlCreator {
         );
     }
 
+    /**
+     * @throws \Exception
+     */
     private function doCreate() {
         $response = $this->makeApiRequest();
 
@@ -72,6 +77,8 @@ class LiqPayCheckoutUrlCreator {
 
     /**
      * @param string $response
+     * @return string
+     * @throws \Exception
      */
     private static function parseApiResponse($response) {
         preg_match(
@@ -80,7 +87,12 @@ class LiqPayCheckoutUrlCreator {
             $matches
         );
 
-        return $matches[1];
+        $url = $matches[1];
+        
+        if ($url)
+            return $url;
+        
+        throw new \Exception('Failed to look for URL.');
     }
 
     /**
